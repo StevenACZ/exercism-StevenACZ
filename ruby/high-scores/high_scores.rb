@@ -17,15 +17,15 @@ class HighScores
     @scores.last
   end
 
-  def personal_best
-    @scores.max
+  def personal_best(n_times = nil)
+    @scores.max(n_times)
   end
 
   def personal_top_three
-    @scores.sort.last(3).reverse
+    personal_best(3)
   end
 
   def latest_is_personal_best?
-    @scores.sort.last == @scores.last
+    personal_best == latest
   end
 end
