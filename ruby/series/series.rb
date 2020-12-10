@@ -13,8 +13,6 @@ class Series
 
   def slices(n_times)
     raise ArgumentError unless n_times <= @string_num.size
-    series = []
-    @string_num.each_cons(n_times) { |serie| series.push serie.join }
-    series
+    @string_num.each_cons(n_times).map(&:join)
   end
 end
