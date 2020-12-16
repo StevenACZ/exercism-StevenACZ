@@ -7,11 +7,13 @@ To get started with TDD, see the `README.md` file in your
 =end
 
 class Hamming
+  # compute function returns the count of different threads, as long as
+  #   they have the same size, otherwise it will raise an ArgumentError
   def self.compute(dna_1, dna_2)
     raise ArgumentError unless dna_1.size == dna_2.size
 
-    count = 0
-    dna_1.chars.each_with_index { |char, index| count += 1 unless char == dna_2[index] }
-    count
+    dna_1.chars.each_with_index.reduce(0) do |counter, (char, index)|
+      char != dna_2[index] ? counter += 1 : counter
+    end
   end
 end
