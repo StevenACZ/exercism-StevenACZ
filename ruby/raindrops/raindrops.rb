@@ -7,7 +7,13 @@ class Raindrops
     7 => "Plong"
   }
 
+  def self.convert(integer)
+    new(integer).to_s
+  end
+
   private
+
+  attr_reader :integer, :rules
 
   # initialize methods gets the data and
   #   if the user does not create some
@@ -17,33 +23,27 @@ class Raindrops
     @rules = rules
   end
 
-  def self.convert(integer)
-    new(integer).to_s
-  end
-
-  protected
-
   # convert methods return @integer.to_s if the
-  #   output function result is nil; otherwise, convert
+  #   output function result is nil or false; otherwise, convert
   #   methods will return output function result
   def convert
-    output || @integer.to_s
+    output || integer.to_s
   end
 
-  # factor? methods return a boolean
+  # factor? methods return a Boolean
   def factor?(number)
-    @integer % number == 0
+    integer % number == 0
   end
 
   # output methods convert a number to a string,
   #   the contents of which depend on the number's
   #   factors and the rules
   def output
-    @rules
-      .filter { |factor, _| factor?(factor) }
+    rules
+      .select { |factor, _| factor?(factor)}
       .values
+      .tap { |sound| sound << integer if sound.empty? }
       .join
-      .presence
   end
 
   public
@@ -53,18 +53,12 @@ class Raindrops
   end
 end
 
-class String
-  def presence
-    self unless self.empty?
-  end
-end
-
 if $PROGRAM_NAME == __FILE__
   custom_rules = {
     3 => 'Fizz',
     5 => 'Buzz'
   }
-  -15.upto(15) do |drip|
+  -2.upto(2) do |drip|
     puts Raindrops.new(drip, custom_rules)
   end
 end
