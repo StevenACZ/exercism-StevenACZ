@@ -35,10 +35,10 @@ class Raindrops
     integer % number == 0
   end
 
-  # output methods convert a number to a string,
+  # drop methods convert a number to a string,
   #   the contents of which depend on the number's
   #   factors and the rules
-  def output
+  def drop
     rules
       .select { |factor, _| factor?(factor)}
       .values
