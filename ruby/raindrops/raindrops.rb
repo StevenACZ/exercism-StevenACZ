@@ -3,11 +3,20 @@ class Raindrops
   # default rules
   RULES = { 3 => "Pling", 5 => "Plang", 7 => "Plong" }
 
-  # initialize methods gets the data
+  # initialize methods gets the data and
+  #   if the user does not create some
+  #   rules, the default ones will be used
   def initialize(integer, rules = RULES)
     @integer = integer
     @rules = rules
   end
+
+  # to_s methods print the result
+  def to_s
+    convert.to_s
+  end
+
+  private
 
   # self.convert method redirects to the true convert method
   def self.convert(integer, rules = RULES)
@@ -15,18 +24,14 @@ class Raindrops
   end
 
   # convert methods convert a number to a string,
-  #   the contents of which depend on the number's factors.
+  #   the contents of which depend on the number's
+  #   factors and the rules
   def convert
     sound = ""
     @rules.each do |key, value|
       sound << value if @integer % key == 0
     end
-    sound.empty? ? @integer.to_s : sound
-  end
-
-  # to_s methods print the result
-  def to_s
-    convert
+    sound.empty? ? @integer : sound
   end
 end
 
