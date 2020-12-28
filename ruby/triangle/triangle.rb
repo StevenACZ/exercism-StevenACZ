@@ -33,7 +33,6 @@ if $PROGRAM_NAME == __FILE__
   triangle2 = Triangle.new([1, 3, 1])
   triangle3 = Triangle.new([3, 1, 1])
   triangle4 = Triangle.new([5, 4, 6])
-
   p [4, 4, 4]
   p triangle1.equilateral?
   p triangle1.isosceles?
