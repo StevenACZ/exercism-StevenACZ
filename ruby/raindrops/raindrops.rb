@@ -1,7 +1,13 @@
 # Raindrops class has a method that convert a number to a string
 class Raindrops
   # default rules
-  RULES = { 3 => "Pling", 5 => "Plang", 7 => "Plong" }
+  RULES = {
+    3 => "Pling",
+    5 => "Plang",
+    7 => "Plong"
+  }
+
+  private
 
   # initialize methods gets the data and
   #   if the user does not create some
@@ -11,27 +17,45 @@ class Raindrops
     @rules = rules
   end
 
-  # to_s methods print the result
-  def to_s
-    convert.to_s
+  def self.convert(integer)
+    new(integer).to_s
   end
 
-  private
+  protected
 
-  # self.convert method redirects to the true convert method
-  def self.convert(integer, rules = RULES)
-    new(integer, rules).to_s
+  # convert methods return @integer.to_s if the
+  #   output function result is nil; otherwise, convert
+  #   methods will return output function result
+  def convert
+    output || @integer.to_s
   end
 
-  # convert methods convert a number to a string,
+  # factor? methods return a boolean
+  def factor?(number)
+    @integer % number == 0
+  end
+
+  # output methods convert a number to a string,
   #   the contents of which depend on the number's
   #   factors and the rules
-  def convert
-    sound = ""
-    @rules.each do |key, value|
-      sound << value if @integer % key == 0
-    end
-    sound.empty? ? @integer : sound
+  def output
+    @rules
+      .filter { |factor, _| factor?(factor) }
+      .values
+      .join
+      .presence
+  end
+
+  public
+
+  def to_s
+    convert
+  end
+end
+
+class String
+  def presence
+    self unless self.empty?
   end
 end
 
