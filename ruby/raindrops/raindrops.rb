@@ -23,26 +23,31 @@ class Raindrops
     @rules = rules
   end
 
-  # factor? methods return a Boolean
+  # sound methods convert a number to a string,
+  #   the contents of which depend on the number's
+  #   factors and the rules
+  def sound
+    rules.each_with_object('') do |(factor, string), sound|
+      sound << string if factor?(factor)
+    end
+  end
+
   def factor?(number)
     integer % number == 0
   end
 
-  # convert methods convert a number to a string,
-  #   the contents of which depend on the number's
-  #   factors and the rules
-  def convert
-    rules
-      .select { |factor, _| factor?(factor)}
-      .values
-      .tap { |sound| sound << integer if sound.empty? }
-      .join
+  def silent?
+    sound.empty?
+  end
+
+  def drop
+    silent? ? integer : sound
   end
 
   public
 
   def to_s
-    convert
+    drop.to_s
   end
 end
 
