@@ -27,13 +27,13 @@ class Raindrops
   #   the contents of which depend on the number's
   #   factors and the rules
   def sound
-    rules.each_with_object('') do |(factor, string), sound|
-      sound << string if factor?(factor)
+    @sound ||= rules.each_with_object('') do |(factor, note), sound|
+      sound << note if factor?(factor)
     end
   end
 
   def factor?(number)
-    integer % number == 0
+    (integer % number).zero?
   end
 
   def silent?
@@ -41,7 +41,7 @@ class Raindrops
   end
 
   def drop
-    silent? ? integer : sound
+    silent? and integer or sound
   end
 
   public
