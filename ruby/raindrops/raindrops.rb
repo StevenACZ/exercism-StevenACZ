@@ -27,7 +27,7 @@ class Raindrops
   #   output function result is nil or false; otherwise, convert
   #   methods will return output function result
   def convert
-    output || integer.to_s
+    drop || integer.to_s
   end
 
   # factor? methods return a Boolean
