@@ -23,22 +23,15 @@ class Raindrops
     @rules = rules
   end
 
-  # convert methods return @integer.to_s if the
-  #   output function result is nil or false; otherwise, convert
-  #   methods will return output function result
-  def convert
-    drop || integer.to_s
-  end
-
   # factor? methods return a Boolean
   def factor?(number)
     integer % number == 0
   end
 
-  # drop methods convert a number to a string,
+  # convert methods convert a number to a string,
   #   the contents of which depend on the number's
   #   factors and the rules
-  def drop
+  def convert
     rules
       .select { |factor, _| factor?(factor)}
       .values
@@ -58,7 +51,7 @@ if $PROGRAM_NAME == __FILE__
     3 => 'Fizz',
     5 => 'Buzz'
   }
-  -2.upto(2) do |drip|
+  -15.upto(15) do |drip|
     puts Raindrops.new(drip, custom_rules)
   end
 end
