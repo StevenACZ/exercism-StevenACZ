@@ -1,0 +1,2 @@
+export const colorCode = (resistor_color) => COLORS.findIndex((color) => color === resistor_color.toLowerCase());
+export const COLORS = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"];

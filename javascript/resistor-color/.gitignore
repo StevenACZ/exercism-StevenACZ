@@ -1,0 +1,7 @@
+/node_modules
+/.exercism
+/babel.config.js
+/.eslintrc
+/.npmrc
+/package.json
+/package-lock.json
